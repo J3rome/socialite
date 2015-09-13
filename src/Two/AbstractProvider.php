@@ -200,9 +200,9 @@ abstract class AbstractProvider implements ProviderContract
 
     public function userByToken($token)
     {
-        if ($this->hasInvalidState()) {
+        /*if ($this->hasInvalidState()) {
             throw new InvalidStateException;
-        }
+        }*/
 
         $user = $this->mapUserToObject($this->getUserByToken($token));
 
