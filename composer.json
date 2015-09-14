@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "j3rome\\Socialite\\": "src/"
+            "Laravel\\Socialite\\": "src/"
         }
     },
     "extra": {
