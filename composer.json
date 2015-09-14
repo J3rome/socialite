@@ -1,5 +1,5 @@
 {
-    "name": "laravel/socialite",
+    "name": "j3rome/socialite",
     "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
     "keywords": ["oauth", "laravel"],
     "license": "MIT",
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Socialite\\": "src/"
+            "j3rome\\Socialite\\": "src/"
         }
     },
     "extra": {
