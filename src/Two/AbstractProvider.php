@@ -117,14 +117,14 @@ abstract class AbstractProvider implements ProviderContract
      * Map the raw user array to a Socialite User instance.
      *
      * @param  array  $user
-     * @return \Laravel\Socialite\User
+     * @return \Laravel\Socialite\Two\User
      */
     abstract protected function mapUserToObject(array $user);
 
     /**
      * Redirect the user of the application to the provider's authentication screen.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function redirect()
     {
@@ -210,6 +210,19 @@ abstract class AbstractProvider implements ProviderContract
     }
 
     /**
+     * Get a Social User instance from a known access token.
+     *
+     * @param  string  $token
+     * @return \Laravel\Socialite\Two\User
+     */
+    public function userFromToken($token)
+    {
+        $user = $this->mapUserToObject($this->getUserByToken($token));
+
+        return $user->setToken($token);
+    }
+
+    /**
      * Determine if the current request / session has a mismatching "state".
      *
      * @return bool
@@ -286,9 +299,19 @@ abstract class AbstractProvider implements ProviderContract
      */
     public function scopes(array $scopes)
     {
-        $this->scopes = $scopes;
+        $this->scopes = array_unique(array_merge($this->scopes, $scopes));
 
         return $this;
+    }
+
+    /**
+     * Get the current scopes.
+     *
+     * @return array
+     */
+    public function getScopes()
+    {
+        return $this->scopes;
     }
 
     /**
